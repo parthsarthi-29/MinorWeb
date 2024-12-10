@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B.Tech Admissions - IIIT Naya Raipur</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <ul>
+        <% if (typeof errors != 'undefined') { %> <% errors.forEach(error => { %>
+        <li><%= error.message %></li>
+        <% }) %> <% } %>
+      </ul>
+  
+      <ul>
+        <% if(messages.success_msg) { %>
+        <li><%= messages.success_msg %></li>
+        <% } %>
+      </ul>
+  
+      <ul>
+        <% if (messages.error) { %>
+        <li><%= messages.error %></li>
+        <% } %>
+      </ul>
+  <header>
+<div class="navbar">
+  <div class="navbar-logo">
+    IIIT Naya Raipur B.Tech Admissions
+  </div>
+  <div class="navbar-links">
+    <a href="#home">Home</a>
+    <a href="#contact">Contact</a>
+    <a href="#help">Help</a>
+    <a href="#" class="disabled">Disabled</a>
+  </div>
+</div>
+  </header>
+  <main>
+    <div class="login-container">
+      <div class="login-box">
+        <div class="logo-image">
+          <img src="https://erp.iiitnr.edu.in/client/iiitnr/images/logo/site_logo.png" alt="IIIT Logo" alt="IIIT Logo">
+        </div>
+        <form action="/users/login" method="POST">
+          <label for="email">Email</label><input type="email" id="email" name="email" placeholder="Enter Your Email" required>
+          <label for="password">Password</label><input type="password" id="password" name="password" placeholder="Enter Your Password" required>
+            <button type="submit"value="Login">Login</button>
+          <a href="/users/register">New? Register Here!</a>
+          </form>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

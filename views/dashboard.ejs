@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css"
+  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #333;
+      color: #fff;
+    }
+
+    .profile {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .profile-name {
+      padding: 5px 10px;
+      background-color: #444;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    .profile-name:hover {
+      background-color: #4caf50;
+    }
+
+    .profile-dropdown {
+      display: none;
+      position: absolute;
+      top: 40px;
+      right: 0;
+      background-color: #444;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      min-width: 200px;
+      z-index: 100;
+    }
+
+    .profile-dropdown a {
+      padding: 10px;
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      border-bottom: 1px solid #666;
+    }
+
+    .profile-dropdown a:hover {
+      background-color: #555;
+    }
+
+    .sidebar {
+      width: 230px;
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      height: calc(100vh - 50px);
+      position: fixed;
+      top: 50px;
+      left: 0;
+    }
+
+    .sidebar h2 {
+      color: #fff;
+    }
+
+    .sidebar a {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 0;
+      font-size: 18px;
+      margin: 10px 0;
+      border-left: 4px solid transparent;
+      transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+      border-left: 4px solid #4caf50;
+      padding-left: 20px;
+      background-color: #444;
+    }
+
+    .sidebar a.active {
+      border-left: 4px solid #4caf50;
+      background-color: #444;
+    }
+
+    .content {
+      margin-left: 250px;
+      padding: 20px;
+      background-color: #f4f4f4;
+      height: calc(100vh - 50px);
+      overflow-x: hidden;
+    }
+
+    .content h1 {
+      color: #333;
+    }
+
+    .section {
+      display: none;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      margin-top: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .logout {
+      color: #fff;
+      text-decoration: none;
+      background-color: #f44336;
+      padding: 10px 15px;
+      border-radius: 5px;
+      text-align: center;
+      margin-top: 20px;
+      display: inline-block;
+    }
+
+    .logout:hover {
+      background-color: #d32f2f;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="navbar-logo">
+      <h2>Dashboard</h2>
+    </div>
+    <div class="profile" id="profile">
+      <div class="profile-name">Hello, <%= user %></div>
+      <div class="profile-dropdown" id="profileDropdown">
+        <a href="/users/profile">My Profile</a>
+        <a href="/users/logout" class="logout">Logout</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="sidebar">
+    <h2>Admin Menu</h2>
+    <a href="#" id="resultsLink">Results</a>
+    <a href="#" id="dataLink">Data</a>
+  </div>
+
+  <div class="content">
+    <h1>Welcome to the Admin Dashboard</h1>
+
+    <div id="results" class="section">
+      <h3>Results Section</h3>
+      <p>Here you can manage and view the results.</p>
+    </div>
+
+    <div id="data" class="section">
+      <h3>Data Section</h3>
+      <p>Here you can manage and view the data.</p>
+    </div>
+  </div>
+
+  <script>
+    // Toggle Profile Dropdown
+    const profile = document.getElementById("profile");
+    const profileDropdown = document.getElementById("profileDropdown");
+
+    profile.addEventListener("click", () => {
+      profileDropdown.style.display =
+        profileDropdown.style.display === "block" ? "none" : "block";
+    });
+
+    // Close dropdown when clicking outside
+    window.addEventListener("click", (e) => {
+      if (!profile.contains(e.target)) {
+        profileDropdown.style.display = "none";
+      }
+    });
+
+    // Section Navigation
+    document.getElementById("resultsLink").addEventListener("click", function () {
+      document.getElementById("results").classList.add("active");
+      document.getElementById("data").classList.remove("active");
+      document.getElementById("resultsLink").classList.add("active");
+      document.getElementById("dataLink").classList.remove("active");
+    });
+
+    document.getElementById("dataLink").addEventListener("click", function () {
+      document.getElementById("data").classList.add("active");
+      document.getElementById("results").classList.remove("active");
+      document.getElementById("dataLink").classList.add("active");
+      document.getElementById("resultsLink").classList.remove("active");
+    });
+
+    // Default Section
+    document.getElementById("results").classList.add("active");
+    document.getElementById("resultsLink").classList.add("active");
+  </script>
+</body>
+</html>
